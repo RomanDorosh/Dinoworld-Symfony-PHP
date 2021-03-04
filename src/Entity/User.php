@@ -45,9 +45,9 @@ class User
     private $password;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="json")
      */
-    private $admin;
+    private $roles = [];
 
     /**
      * @ORM\ManyToMany(targetEntity=Dinosaur::class, inversedBy="users")
@@ -124,14 +124,14 @@ class User
         return $this;
     }
 
-    public function getAdmin(): ?bool
+    public function getRoles(): ?bool
     {
-        return $this->admin;
+        return $this->roles;
     }
 
-    public function setAdmin(bool $admin): self
+    public function setRoles(bool $roles): self
     {
-        $this->admin = $admin;
+        $this->roles = $roles;
 
         return $this;
     }
@@ -158,5 +158,9 @@ class User
         $this->dinosaurus->removeElement($dinosaur);
 
         return $this;
+    }
+
+    public function __toString() {
+        return $this->id . ' - ' . $this->name;
     }
 }
