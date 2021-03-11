@@ -51,6 +51,11 @@ class Continent
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->id . ' - ' . $this->name;
+    }
+
     /**
      * @return Collection|Dinosaur[]
      */
@@ -79,9 +84,5 @@ class Continent
         }
 
         return $this;
-    }
-
-    public function __toString() {
-        return $this->id . ' - ' . $this->name;
     }
 }

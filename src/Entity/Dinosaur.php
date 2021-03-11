@@ -25,54 +25,62 @@ class Dinosaur
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Period::class, inversedBy="dinosaurs")
+     * @ORM\ManyToOne(targetEntity=period::class, inversedBy="dinosaurs")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $period;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Diet::class, inversedBy="dinosaurs")
+     * @ORM\ManyToOne(targetEntity=diet::class, inversedBy="dinosaurs")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $diet;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Continent::class, inversedBy="dinosaurs")
+     * @ORM\ManyToOne(targetEntity=continent::class, inversedBy="dinosaurs")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $continent;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $weight;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="float")
      */
     private $height;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $top_speed;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $lenght;
 
     /**
-     * @ORM\Column(type="blob", nullable=true)
+     * @ORM\Column(type="integer")
      */
-    private $img;
+    private $top_speed;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $top;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="dinosaurus")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $img;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="dinosaur")
      */
     private $users;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $info;
 
     public function __construct()
     {
@@ -96,36 +104,36 @@ class Dinosaur
         return $this;
     }
 
-    public function getPeriod(): ?Period
+    public function getPeriod(): ?period
     {
         return $this->period;
     }
 
-    public function setPeriod(?Period $period): self
+    public function setPeriod(?period $period): self
     {
         $this->period = $period;
 
         return $this;
     }
 
-    public function getDiet(): ?Diet
+    public function getDiet(): ?diet
     {
         return $this->diet;
     }
 
-    public function setDiet(?Diet $diet): self
+    public function setDiet(?diet $diet): self
     {
         $this->diet = $diet;
 
         return $this;
     }
 
-    public function getContinent(): ?Continent
+    public function getContinent(): ?continent
     {
         return $this->continent;
     }
 
-    public function setContinent(?Continent $continent): self
+    public function setContinent(?continent $continent): self
     {
         $this->continent = $continent;
 
@@ -137,7 +145,7 @@ class Dinosaur
         return $this->weight;
     }
 
-    public function setWeight(?int $weight): self
+    public function setWeight(int $weight): self
     {
         $this->weight = $weight;
 
@@ -149,21 +157,9 @@ class Dinosaur
         return $this->height;
     }
 
-    public function setHeight(?float $height): self
+    public function setHeight(float $height): self
     {
         $this->height = $height;
-
-        return $this;
-    }
-
-    public function getTopSpeed(): ?int
-    {
-        return $this->top_speed;
-    }
-
-    public function setTopSpeed(?int $top_speed): self
-    {
-        $this->top_speed = $top_speed;
 
         return $this;
     }
@@ -173,21 +169,21 @@ class Dinosaur
         return $this->lenght;
     }
 
-    public function setLenght(?int $lenght): self
+    public function setLenght(int $lenght): self
     {
         $this->lenght = $lenght;
 
         return $this;
     }
 
-    public function getImg()
+    public function getTopSpeed(): ?int
     {
-        return $this->img;
+        return $this->top_speed;
     }
 
-    public function setImg($img): self
+    public function setTopSpeed(int $top_speed): self
     {
-        $this->img = $img;
+        $this->top_speed = $top_speed;
 
         return $this;
     }
@@ -197,9 +193,21 @@ class Dinosaur
         return $this->top;
     }
 
-    public function setTop(?bool $top): self
+    public function setTop(bool $top): self
     {
         $this->top = $top;
+
+        return $this;
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(?string $img): self
+    {
+        $this->img = $img;
 
         return $this;
     }
@@ -216,7 +224,7 @@ class Dinosaur
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addDinosauru($this);
+            $user->addDinosaur($this);
         }
 
         return $this;
@@ -225,13 +233,21 @@ class Dinosaur
     public function removeUser(User $user): self
     {
         if ($this->users->removeElement($user)) {
-            $user->removeDinosauru($this);
+            $user->removeDinosaur($this);
         }
 
         return $this;
     }
 
-    public function __toString() {
-        return $this->id . ' - ' . $this->name;
+    public function getInfo(): ?string
+    {
+        return $this->info;
+    }
+
+    public function setInfo(?string $info): self
+    {
+        $this->info = $info;
+
+        return $this;
     }
 }
