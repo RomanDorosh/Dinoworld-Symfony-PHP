@@ -73,7 +73,7 @@ class Dinosaur
     private $img;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="Dinosaur")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="dinosaur")
      */
     private $users;
 

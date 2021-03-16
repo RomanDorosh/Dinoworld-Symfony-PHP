@@ -49,22 +49,22 @@ class DinosaurController extends AbstractController
                 "name" => $diet->getName()
             ];
 
-            // $usersArr = [];
+            $usersArr = [];
 
-            // $users = $dinosaur->getUsers();
+            $users = $dinosaur->getUsers();
 
-            // foreach ($users as $user) {
-            //     $userArr = [
-            //         "ID" => $user->getId(),
-            //         "name" => $user->getName(),
-            //         "lastname" => $user->getLastname(),
-            //         "birth_date" => $user->getBirthDate(),
-            //         "email" => $user->getEmail(),
-            //         "roles" => $user->getRoles(),
-            //         "password" => $user->getPassword()
-            //     ];
-            //     $usersArr[] = $userArr;
-            // }
+            foreach ($users as $user) {
+                $userArr = [
+                    "ID" => $user->getId(),
+                    "name" => $user->getName(),
+                    "lastname" => $user->getLastname(),
+                    "birth_date" => $user->getBirthDate(),
+                    "email" => $user->getEmail(),
+                    "roles" => $user->getRoles(),
+                    "password" => $user->getPassword()
+                ];
+                $usersArr[] = $userArr;
+            }
 
             $dinosaurArr = [
                 "ID" => $dinosaur->getId(),
@@ -78,7 +78,7 @@ class DinosaurController extends AbstractController
                 "top_speed" => $dinosaur->getTopSpeed(),
                 "top" => $dinosaur->getTop(),
                 "img" => $dinosaur->getImg(),
-                // "users" => $usersArr,
+                "users" => $usersArr,
                 "info" => $dinosaur->getInfo(),
             ];
 
