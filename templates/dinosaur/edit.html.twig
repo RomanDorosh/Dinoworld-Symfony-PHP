@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Dinosaur{% endblock %}
+
+{% block body %}
+    <h1>Edit Dinosaur</h1>
+
+    {{ include('dinosaur/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('dinosaur_index') }}">back to list</a>
+
+    {{ include('dinosaur/_delete_form.html.twig') }}
+{% endblock %}

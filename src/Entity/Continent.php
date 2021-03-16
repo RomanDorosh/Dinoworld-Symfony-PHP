@@ -25,7 +25,7 @@ class Continent
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Dinosaur::class, mappedBy="continent")
+     * @ORM\OneToMany(targetEntity=Dinosaur::class, mappedBy="Continent")
      */
     private $dinosaurs;
 

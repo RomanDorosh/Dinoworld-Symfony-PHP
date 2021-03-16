@@ -25,19 +25,19 @@ class Dinosaur
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=period::class, inversedBy="dinosaurs")
+     * @ORM\ManyToOne(targetEntity=Period::class, inversedBy="Dinosaurs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $period;
 
     /**
-     * @ORM\ManyToOne(targetEntity=diet::class, inversedBy="dinosaurs")
+     * @ORM\ManyToOne(targetEntity=Diet::class, inversedBy="Dinosaurs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $diet;
 
     /**
-     * @ORM\ManyToOne(targetEntity=continent::class, inversedBy="dinosaurs")
+     * @ORM\ManyToOne(targetEntity=Continent::class, inversedBy="Dinosaurs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $continent;
@@ -73,7 +73,7 @@ class Dinosaur
     private $img;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="dinosaur")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="Dinosaur")
      */
     private $users;
 

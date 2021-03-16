@@ -25,7 +25,7 @@ class Diet
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Dinosaur::class, mappedBy="diet")
+     * @ORM\OneToMany(targetEntity=Dinosaur::class, mappedBy="Diet")
      */
     private $dinosaurs;
 

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dinosaur index{% endblock %}
+
+{% block body %}
+    <h1>Dinosaur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Weight</th>
+                <th>Height</th>
+                <th>Lenght</th>
+                <th>Top_speed</th>
+                <th>Top</th>
+                <th>Img</th>
+                <th>Info</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dinosaur in dinosaurs %}
+            <tr>
+                <td>{{ dinosaur.id }}</td>
+                <td>{{ dinosaur.name }}</td>
+                <td>{{ dinosaur.weight }}</td>
+                <td>{{ dinosaur.height }}</td>
+                <td>{{ dinosaur.lenght }}</td>
+                <td>{{ dinosaur.topSpeed }}</td>
+                <td>{{ dinosaur.top ? 'Yes' : 'No' }}</td>
+                <td>{{ dinosaur.img }}</td>
+                <td>{{ dinosaur.info }}</td>
+                <td>
+                    <a href="{{ path('dinosaur_show', {'id': dinosaur.id}) }}">show</a>
+                    <a href="{{ path('dinosaur_edit', {'id': dinosaur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('dinosaur_new') }}">Create new</a>
+{% endblock %}

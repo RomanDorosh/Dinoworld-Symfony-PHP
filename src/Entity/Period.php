@@ -25,7 +25,7 @@ class Period
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Dinosaur::class, mappedBy="period")
+     * @ORM\OneToMany(targetEntity=Dinosaur::class, mappedBy="Period")
      */
     private $dinosaurs;
 

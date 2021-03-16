@@ -52,7 +52,7 @@ class User implements UserInterface
     private $birth_date;
 
     /**
-     * @ORM\ManyToMany(targetEntity=dinosaur::class, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity=Dinosaur::class, inversedBy="users")
      */
     private $dinosaur;
 
