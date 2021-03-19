@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,9 +21,26 @@ class UserController extends AbstractController
      */
     public function index(UserRepository $userRepository): Response
     {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
+        $users = [];
+        $usersEntities = $userRepository->findAll();
+        foreach ($usersEntities as $userEntity) {
+            $user = [];
+            $user["email"] = $userEntity->getEmail();
+            $user["name"] = $userEntity->getName();
+            $user["lastname"] = $userEntity->getLastname();
+            $user["birth_date"] = $userEntity->getBirthDate();
+            $user["roles"] = $userEntity->getRoles();
+            $user["dinosaur"] = $userEntity->getDinosaur();
+            $users[] = $user;
+        }
+
+        return new JsonResponse($users);
+
+
+
+        // return $this->render('user/index.html.twig', [
+        //     'users' => $userRepository->findAll(),
+        // ]);
     }
 
     /**
@@ -83,7 +101,7 @@ class UserController extends AbstractController
      */
     public function delete(Request $request, User $user): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
