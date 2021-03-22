@@ -43,28 +43,27 @@ class UserController extends AbstractController
         // ]);
     }
 
-    /**
-     * @Route("/new", name="user_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+    // /**
+    //  * @Route("/register", name="user_register", methods={"GET","POST"})
+    //  */
+    // public function register(Request $request, EntityManagerInteface $em, UserPasswordEncoderInteface $encoder): Response
+    // {
+    //     $userData = json_decode($request->getContent());
+    //     $user = new User;
+    //     $user->setEmail($userData->email);
+    //     $password=$encoder->encodePassword($user, $userData->password);
+    //     $user->setPassword($password);
+    //     $user->setName($userData->name);
+    //     $user->setLastname($userData->lastname);
+    //     $user->setBirthDate($userData->birthdate);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+    //     $em->peprsist($user);
+    //     $em->flush();
 
-            return $this->redirectToRoute('user_index');
-        }
 
-        return $this->render('user/new.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
-    }
+
+    //     return new JsonResponse($user);
+    // }
 
     /**
      * @Route("/{id}", name="user_show", methods={"GET"})
