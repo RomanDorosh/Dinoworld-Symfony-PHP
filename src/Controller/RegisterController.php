@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegisterController extends AbstractController
 {
 
-     /**
+    /**
      * @Route("", name="user_register", methods={"GET","POST"})
      */
     public function register(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder): Response
@@ -29,19 +29,18 @@ class RegisterController extends AbstractController
         dump($userData);
         $user = new User;
         $user->setEmail($userData->username);
-        $password=$encoder->encodePassword($user, $userData->password);
+        $password = $encoder->encodePassword($user, $userData->password);
         $user->setPassword($password);
         $user->setName($userData->name);
         $user->setLastname($userData->lastname);
-        $user->setBirthDate($userData->birthdate);
+        $Objecdate = \DateTime::createFromFormat('Y-m-d', $userData->birthdate);
+        $user->setBirthDate($Objecdate);
 
-        $em->peprsist($user);
+        $em->persist($user);
         $em->flush();
 
 
 
         return new JsonResponse($user);
     }
-
-
 }
