@@ -111,4 +111,20 @@ class FavoriteController extends AbstractController
 
         return new JsonResponse("Dinosaur has been added");
     }
+
+    /**
+     * @Route("/remove/{id}", name="favorite_remove", methods={"DELETE"})
+     */
+    public function removeFavorite($id, EntityManagerInterface $em, DinosaurRepository $dinosaurRepository, UserRepository $userRepository): Response
+    {
+        $user = $this->getUser();
+        $dinosaur = $dinosaurRepository->find($id);
+        $user->removeDinosaur($dinosaur);
+
+        $em->persist($user);
+        $em->persist($dinosaur);
+        $em->flush();
+
+        return new JsonResponse("Dinosaur ${id} has been delete");
+    }
 }
