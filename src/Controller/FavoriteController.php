@@ -125,6 +125,6 @@ class FavoriteController extends AbstractController
         $em->persist($dinosaur);
         $em->flush();
 
-        return new JsonResponse("Dinosaur ${id} has been delete");
+        return new JsonResponse("Dinosaur ${id} has been delete from favorite");
     }
 }
