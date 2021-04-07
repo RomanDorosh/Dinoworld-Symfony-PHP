@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+//This controller was used only for testing API, it's functionaliy doesn't connect with main project 
+
+
+
 /**
  * @Route("/continent")
  */
@@ -83,7 +87,7 @@ class ContinentController extends AbstractController
      */
     public function delete(Request $request, Continent $continent): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$continent->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $continent->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($continent);
             $entityManager->flush();
